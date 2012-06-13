@@ -2,13 +2,13 @@
 %define	major	0
 %define	girmajor	1.0
 %define	libname	%mklibname	polkit-gtk-mate %{api} %{major}
-%define	girname	%mklibname	polkitgtkmate %{girmajor}
+%define	girname	%mklibname	polkitgtkmate-gir %{girmajor}
 %define	devname	%mklibname	polkit-gtk-mate -d
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
 Version:	1.2.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://mate-desktop.org
