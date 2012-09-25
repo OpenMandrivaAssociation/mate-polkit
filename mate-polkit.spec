@@ -7,8 +7,8 @@
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.2.0
-Release:	2
+Version:	1.4.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://mate-desktop.org
@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 Provides:	polkit-agent
-Provides:	polkit-mate = %{version}-%{release}
+Provides:	polkit-mate = %{EVRD}
 
 %description
 polkit-mate provides an authentication agent for PolicyKit
@@ -47,7 +47,7 @@ Summary:	Development files for polkit-mate
 Group:		Development/C
 Requires:	%{libname} = %{version}
 Requires:	%{girname} = %{version}
-Provides:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
 Development files for polkit-mate.
@@ -67,9 +67,9 @@ NOCONFIGURE=yes ./autogen.sh
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 
-%find_lang polkit-mate-1
+%find_lang %{name} --with-mate
 
-%files -f polkit-mate-1.lang
+%files -f %{name}.lang
 %doc COPYING AUTHORS README
 %config(noreplace) %{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 %{_libexecdir}/polkit-mate-authentication-agent-1
