@@ -67,7 +67,7 @@ NOCONFIGURE=yes ./autogen.sh
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 
-%find_lang %{name} --with-mate
+%find_lang %{name}
 
 %files -f %{name}.lang
 %doc COPYING AUTHORS README
