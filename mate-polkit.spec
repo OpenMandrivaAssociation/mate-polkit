@@ -1,27 +1,28 @@
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
 %define	api	1
 %define	major	0
-%define	girmajor	1.0
+%define	gimajor	%{api}.0
 %define	libname	%mklibname	polkit-gtk-mate %{api} %{major}
-%define	girname	%mklibname	polkitgtkmate-gir %{girmajor}
+%define	girname	%mklibname	polkitgtkmate-gir %{gimajor}
 %define	devname	%mklibname	polkit-gtk-mate -d
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.4.0
+Version:	1.8.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://mate-desktop.org
-Source0:	http://pub.mate-desktop.org/releases/1.2/%{name}-%{version}.tar.xz
+Url:		http://mate-desktop.org
+Source0:	http://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
-
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-Provides:	polkit-agent
+#Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
 %description
@@ -45,8 +46,8 @@ GObject Introspection interface library for %{name}
 %package -n %{devname}
 Summary:	Development files for polkit-mate
 Group:		Development/C
-Requires:	%{libname} = %{version}
-Requires:	%{girname} = %{version}
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
@@ -54,9 +55,9 @@ Development files for polkit-mate.
 
 %prep
 %setup -q
+NOCONFIGURE=yes ./autogen.sh
 
 %build
-NOCONFIGURE=yes ./autogen.sh
 %configure2_5x \
 	--disable-static
 
@@ -78,7 +79,7 @@ sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostar
 %{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
 
 %files -n %{girname}
-%{_libdir}/girepository-1.0/PolkitGtkMate-%{girmajor}.typelib
+%{_libdir}/girepository-1.0/PolkitGtkMate-%{gimajor}.typelib
 
 %files -n %{devname}
 %dir %{_includedir}/polkit-gtk-mate-1
@@ -86,5 +87,5 @@ sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostar
 %{_includedir}/polkit-gtk-mate-1/polkitgtkmate/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/polkit-gtk-mate-%{api}.pc
-%{_datadir}/gir-1.0/PolkitGtkMate-%{girmajor}.gir
+%{_datadir}/gir-1.0/PolkitGtkMate-%{gimajor}.gir
 
