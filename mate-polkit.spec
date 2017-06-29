@@ -64,9 +64,11 @@ Development files for polkit-mate.
 
 %install
 %makeinstall_std
+
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
 
+# locales
 %find_lang %{name}
 
 %files -f %{name}.lang
