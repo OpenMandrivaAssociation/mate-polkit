@@ -9,20 +9,21 @@
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.14.0
+Version:	1.18.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://mate-desktop.org
-Source0:	http://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
+Url:		https://mate-desktop.org
+Source0:	https://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	mate-common
+BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-#Provides:	polkit-agent
+Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
 %description
@@ -55,12 +56,10 @@ Development files for polkit-mate.
 
 %prep
 %setup -q
-NOCONFIGURE=yes ./autogen.sh
 
 %build
-%configure2_5x \
-	--disable-static --with-gtk=3.0
-
+#NOCONFIGURE=yes ./autogen.sh
+%configure
 %make
 
 %install
