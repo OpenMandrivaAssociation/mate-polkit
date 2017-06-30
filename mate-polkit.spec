@@ -19,10 +19,11 @@ Source1:	polkit-gnome-authentication-agent-1.desktop.in
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	mate-common
+BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
 Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
