@@ -24,13 +24,26 @@ BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
 Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
 %description
-polkit-mate provides an authentication agent for PolicyKit
-that matches the look and feel of the MATE desktop.
+The MATE Desktop Environment is the continuation of GNOME 2. It provides an
+intuitive and attractive desktop environment using traditional metaphors for
+Linux and other Unix-like operating systems.
+
+MATE is under active development to add support for new technologies while
+preserving a traditional desktop experience.
+
+This package provides an Authentication Agent for PolicyKit that integrates
+well with the MATE desktop environment
+
+%files -f %{name}.lang
+%doc COPYING AUTHORS README
+%config(noreplace) %{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
+%{_libexecdir}/polkit-mate-authentication-agent-1
+
+#----------------------------------------------------------------------------
 
 %package -n %{libname}
 Summary:	Development files for polkit-mate
@@ -39,12 +52,22 @@ Group:		System/Libraries
 %description -n %{libname}
 Development files for polkit-mate.
 
+%files -n %{libname}
+%{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
+
+#----------------------------------------------------------------------------
+
 %package -n %{girname}
 Group:		System/Libraries
 Summary:	GObject Introspection interface library for %{name}
 
 %description -n %{girname}
 GObject Introspection interface library for %{name}
+
+%files -n %{girname}
+%{_libdir}/girepository-1.0/PolkitGtkMate-%{gimajor}.typelib
+
+#----------------------------------------------------------------------------
 
 %package -n %{devname}
 Summary:	Development files for polkit-mate
@@ -55,6 +78,16 @@ Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
 Development files for polkit-mate.
+
+%files -n %{devname}
+%dir %{_includedir}/polkit-gtk-mate-1
+%dir %{_includedir}/polkit-gtk-mate-1/polkitgtkmate
+%{_includedir}/polkit-gtk-mate-1/polkitgtkmate/*
+%{_libdir}/*.so
+%{_libdir}/pkgconfig/polkit-gtk-mate-%{api}.pc
+%{_datadir}/gir-1.0/PolkitGtkMate-%{gimajor}.gir
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
@@ -67,28 +100,6 @@ Development files for polkit-mate.
 %install
 %makeinstall_std
 
-#install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
-#sed -i 's,@FULL_LIBEXECDIR@,%{_libdir},' %{buildroot}%{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
-
 # locales
 %find_lang %{name}
-
-%files -f %{name}.lang
-%doc COPYING AUTHORS README
-%config(noreplace) %{_sysconfdir}/xdg/autostart/polkit-mate-authentication-agent-1.desktop
-%{_libexecdir}/polkit-mate-authentication-agent-1
-
-%files -n %{libname}
-%{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
-
-%files -n %{girname}
-%{_libdir}/girepository-1.0/PolkitGtkMate-%{gimajor}.typelib
-
-%files -n %{devname}
-%dir %{_includedir}/polkit-gtk-mate-1
-%dir %{_includedir}/polkit-gtk-mate-1/polkitgtkmate
-%{_includedir}/polkit-gtk-mate-1/polkitgtkmate/*
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/polkit-gtk-mate-%{api}.pc
-%{_datadir}/gir-1.0/PolkitGtkMate-%{gimajor}.gir
 
