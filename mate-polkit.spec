@@ -60,6 +60,7 @@ Development files for %{name}.
 %package -n %{girname}
 Summary:	GObject Introspection interface library for %{name}
 Group:		System/Libraries
+Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface library for %{name}.
