@@ -3,9 +3,9 @@
 %define	api	1
 %define	major	0
 %define	gimajor	%{api}.0
-%define	libname	%mklibname	polkit-gtk-mate %{api} %{major}
-%define	girname	%mklibname	polkitgtkmate-gir %{gimajor}
-%define	devname	%mklibname	polkit-gtk-mate -d
+%define	libname	%mklibname polkit-gtk-mate %{api} %{major}
+%define	girname	%mklibname polkitgtkmate-gir %{gimajor}
+%define	devname	%mklibname polkit-gtk-mate -d
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
@@ -94,7 +94,9 @@ Development files for polkit-mate.
 
 %build
 #NOCONFIGURE=yes ./autogen.sh
-%configure
+%configure \
+	--enable-gtk-doc-html \
+	%{nil}
 %make
 
 %install
