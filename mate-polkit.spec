@@ -36,7 +36,7 @@ MATE is under active development to add support for new technologies while
 preserving a traditional desktop experience.
 
 This package provides an Authentication Agent for PolicyKit that integrates
-well with the MATE desktop environment
+well with the MATE desktop environment.
 
 %files -f %{name}.lang
 %doc COPYING AUTHORS README
