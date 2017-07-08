@@ -50,7 +50,7 @@ Summary:	Development files for polkit-mate
 Group:		System/Libraries
 
 %description -n %{libname}
-Development files for polkit-mate.
+Development files for %{name}.
 
 %files -n %{libname}
 %{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
@@ -58,11 +58,11 @@ Development files for polkit-mate.
 #----------------------------------------------------------------------------
 
 %package -n %{girname}
-Group:		System/Libraries
 Summary:	GObject Introspection interface library for %{name}
+Group:		System/Libraries
 
 %description -n %{girname}
-GObject Introspection interface library for %{name}
+GObject Introspection interface library for %{name}.
 
 %files -n %{girname}
 %{_libdir}/girepository-1.0/PolkitGtkMate-%{gimajor}.typelib
@@ -77,7 +77,7 @@ Requires:	%{girname} = %{version}-%{release}
 Provides:	%{name}-devel = %{EVRD}
 
 %description -n %{devname}
-Development files for polkit-mate.
+Development files for %{name}.
 
 %files -n %{devname}
 %dir %{_includedir}/polkit-gtk-mate-1
