@@ -81,7 +81,6 @@ Provides:	%{name}-devel = %{EVRD}
 This package contains libraries and includes files for developing programs
 based on %{name}.
 
-
 %files -n %{devname}
 %dir %{_includedir}/polkit-gtk-mate-1
 %dir %{_includedir}/polkit-gtk-mate-1/polkitgtkmate
