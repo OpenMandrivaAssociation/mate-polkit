@@ -2,10 +2,11 @@
 
 %define	api	1
 %define	major	0
-%define	gimajor	%{api}.0
 %define	libname	%mklibname polkit-gtk-mate %{api} %{major}
-%define	girname	%mklibname polkitgtkmate-gir %{gimajor}
 %define	devname	%mklibname polkit-gtk-mate -d
+
+%define	gimajor	%{api}.0
+%define	girname	%mklibname polkitgtkmate-gir %{gimajor}
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
@@ -16,14 +17,22 @@ Group:		System/Libraries
 Url:		https://mate-desktop.org
 Source0:	https://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
-BuildRequires:	gtk-doc
+
 BuildRequires:	intltool
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(gtk-doc)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
+BuildRequires:	pkgconfig(polkit-gobject-1)
+
+Requires:       dbus-x11
+Requires:       accountsservice
+
 Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
@@ -50,7 +59,7 @@ Summary:	Development files for polkit-mate
 Group:		System/Libraries
 
 %description -n %{libname}
-This package contains libraries used by %{name}.
+This package contains the shared libraries used by %{name}.
 
 %files -n %{libname}
 %{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
