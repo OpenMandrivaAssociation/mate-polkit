@@ -24,8 +24,6 @@ BuildRequires:	pkgconfig(appindicator3-0.1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
-BuildRequires:	pkgconfig(gobject-introspection-1.0)
-BuildRequires:	pkgconfig(gtk-doc)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
 BuildRequires:	pkgconfig(polkit-gobject-1)
@@ -54,65 +52,16 @@ well with the MATE desktop environment.
 
 #---------------------------------------------------------------------------
 
-%package -n %{libname}
-Summary:	Development files for polkit-mate
-Group:		System/Libraries
-
-%description -n %{libname}
-This package contains the shared libraries used by %{name}.
-
-%files -n %{libname}
-%{_libdir}/libpolkit-gtk-mate-%{api}.so.%{major}*
-
-#---------------------------------------------------------------------------
-
-%package -n %{girname}
-Summary:	GObject Introspection interface library for %{name}
-Group:		System/Libraries
-Requires:	%{libname} = %{version}-%{release}
-
-%description -n %{girname}
-This package contains GObject Introspection interface library for %{name}.
-
-%files -n %{girname}
-%{_libdir}/girepository-1.0/PolkitGtkMate-%{gimajor}.typelib
-
-#---------------------------------------------------------------------------
-
-%package -n %{devname}
-Summary:	Development files for polkit-mate
-Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
-Requires:	%{girname} = %{version}-%{release}
-Provides:	%{name}-devel = %{EVRD}
-
-%description -n %{devname}
-This package contains libraries and includes files for developing programs
-based on %{name}.
-
-%files -n %{devname}
-%dir %{_includedir}/polkit-gtk-mate-1
-%dir %{_includedir}/polkit-gtk-mate-1/polkitgtkmate
-%{_includedir}/polkit-gtk-mate-1/polkitgtkmate/*
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/polkit-gtk-mate-%{api}.pc
-%{_datadir}/gir-1.0/PolkitGtkMate-%{gimajor}.gir
-
-#---------------------------------------------------------------------------
-
 %prep
 %setup -q
 
 %build
 #NOCONFIGURE=yes ./autogen.sh
-%configure \
-	--enable-gtk-doc-html \
-	%{nil}
-%make
+%configure
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 # locales
 %find_lang %{name}
-
