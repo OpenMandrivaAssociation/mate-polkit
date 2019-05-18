@@ -2,5 +2,6 @@ removed_sources:
   mate-polkit-1.14.0.tar.xz: da2b4cf7b905a24fa22dd14e8991a71814ad7777
   mate-polkit-1.18.1.tar.xz: 020d770adb42e7b60a74c5253769491860e0b792
   mate-polkit-1.20.0.tar.xz: 0cf9debfb42d547966e09175d5abe3cb01ddb5f3
-sources:
   mate-polkit-1.20.2.tar.xz: d3dd1f51cc1d53b6c5f1751faea65ee9de4626da
+sources:
+  mate-polkit-1.22.0.tar.xz: 84c665fcde65af59d21a63987a42877fe223d15c
