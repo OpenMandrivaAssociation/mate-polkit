@@ -10,14 +10,15 @@
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.22.0
-Release:	2
+Version:	1.24.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://mate-desktop.org
 Source0:	https://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
 
+BuildRequires:  autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig(appindicator3-0.1)
