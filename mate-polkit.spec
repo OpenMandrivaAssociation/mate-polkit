@@ -1,24 +1,24 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
-%define	api	1
-%define	major	0
-%define	libname	%mklibname polkit-gtk-mate %{api} %{major}
-%define	devname	%mklibname polkit-gtk-mate -d
+%define api 1
+%define major 0
+%define libname %mklibname polkit-gtk-mate %{api} %{major}
+%define devname %mklibname polkit-gtk-mate -d
 
-%define	gimajor	%{api}.0
-%define	girname	%mklibname polkitgtkmate-gir %{gimajor}
+%define gimajor %{api}.0
+%define girname %mklibname polkitgtkmate-gir %{gimajor}
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
 Version:	1.26.0
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://mate-desktop.org
 Source0:	https://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
-
-BuildRequires:  autoconf-archive
+Patch1:		mate-polkit_0001-Fix-segfault-from-gdk_x11_get_server_time-if-not-on-.patch
+BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig(appindicator3-0.1)
@@ -29,9 +29,8 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(polkit-agent-1)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 
-Requires:       dbus-x11
-Requires:       accountsservice
-
+Requires:	dbus-x11
+Requires:	accountsservice
 Provides:	polkit-agent
 Provides:	polkit-mate = %{EVRD}
 
@@ -54,11 +53,18 @@ well with the MATE desktop environment.
 #---------------------------------------------------------------------------
 
 %prep
-%setup -q
+%autosetup -p1
+
+# fix https://github.com/mate-desktop/mate-polkit/issues/56
+sed -i '/^Categories=/d' src/polkit-mate-authentication-agent-1.desktop.in
+sed -i '/^Categories=/d' src/polkit-mate-authentication-agent-1.desktop.in.in
 
 %build
 #NOCONFIGURE=yes ./autogen.sh
-%configure
+%configure \
+	--enable-accountsservice \
+	--enable-appindicator=yes
+
 %make_build
 
 %install
