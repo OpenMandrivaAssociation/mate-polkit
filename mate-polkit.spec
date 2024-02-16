@@ -1,21 +1,13 @@
-%define url_ver %(echo %{version}|cut -d. -f1,2)
-
-%define api 1
-%define major 0
-%define libname %mklibname polkit-gtk-mate %{api} %{major}
-%define devname %mklibname polkit-gtk-mate -d
-
-%define gimajor %{api}.0
-%define girname %mklibname polkitgtkmate-gir %{gimajor}
+%define mate_ver	%(echo %{version}|cut -d. -f1,2)
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.26.1
+Version:	1.28.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://mate-desktop.org
-Source0:	https://pub.mate-desktop.org/releases/%{url_ver}/%{name}-%{version}.tar.xz
+Source0:	https://pub.mate-desktop.org/releases/%{mate_ver}/%{name}-%{version}.tar.xz
 Source1:	polkit-gnome-authentication-agent-1.desktop.in
 
 BuildRequires:	autoconf-archive
@@ -72,3 +64,4 @@ sed -i '/^Categories=/d' src/polkit-mate-authentication-agent-1.desktop.in.in
 
 # locales
 %find_lang %{name}
+
