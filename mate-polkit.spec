@@ -13,7 +13,7 @@ Source1:	polkit-gnome-authentication-agent-1.desktop.in
 BuildRequires:	autoconf-archive
 BuildRequires:	intltool
 BuildRequires:	mate-common
-BuildRequires:	pkgconfig(appindicator3-0.1)
+BuildRequires:	pkgconfig(ayatana-appindicator3-0.1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glib-2.0)
