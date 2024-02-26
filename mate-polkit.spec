@@ -2,7 +2,7 @@
 
 Summary:	PolicyKit integration for the MATE desktop
 Name:		mate-polkit
-Version:	1.28.0
+Version:	1.28.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
